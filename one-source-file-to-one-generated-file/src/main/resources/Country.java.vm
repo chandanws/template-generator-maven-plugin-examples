@@ -2,8 +2,12 @@ package com.danidemi.test;
 
 public enum Country {
 
-    #foreach( $row in $context.data.rows )
-        ${row.data.Country}("${row.data.Code}", "${row.data.Continent}"),
+    #foreach( $row in $source.rows )
+        /**
+        * Item #${row.meta.count} of ${source.rows.size()}.
+        */
+        ${row.data.Country.replace(' ','_')}("${row.data.Code}", "${row.data.Continent}")#if( ${row.meta.count} == ${source.rows.size()} );#else,#end
+
     #end
     
     private final String name;

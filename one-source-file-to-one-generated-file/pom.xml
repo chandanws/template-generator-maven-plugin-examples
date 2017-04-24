@@ -25,19 +25,43 @@
                         </goals>
                         <configuration>
                             <contextMode>ONE_CONTEXT_PER_CSV</contextMode>
-                            <pathToCsv>${basedir}/src/main/resources/countries.csv</pathToCsv>
-                            <pathToOutputFolder>${maven.compiler.target}/generated-sources</pathToOutputFolder>
-                            <fileNameTemplate>Country.java</fileNameTemplate>
-                            <!--
-                            <contextMode>ONE_CONTEXT_PER_FILE</contextMode>
-                            <pathToCsv>${basedir}/src/main/resources/countries.csv</pathToCsv>
-                            -->
+                            <pathToTemplate>${project.basedir}/src/main/resources/Country.java.vm</pathToTemplate>
+                            <pathToCsv>${project.basedir}/src/main/resources/countries.csv</pathToCsv>
+                            <pathToOutputFolder>${build.directory}/generated-sources/tgmp</pathToOutputFolder>
+                            <fileNameTemplate>com/danidemi/test/Country.java</fileNameTemplate>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${build.directory}/generated-sources/tgmp</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>
