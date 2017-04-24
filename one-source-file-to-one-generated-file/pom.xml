@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>template-generator-maven-plugin-examples</artifactId>
+        <groupId>com.danidemi</groupId>
+        <version>0.0.5-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>one-source-file-to-one-generated-file</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.danidemi</groupId>
+                <artifactId>template-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>countries</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <contextMode>ONE_CONTEXT_PER_CSV</contextMode>
+                            <pathToCsv>${basedir}/src/main/resources/countries.csv</pathToCsv>
+                            <pathToOutputFolder>${maven.compiler.target}/generated-sources</pathToOutputFolder>
+                            <fileNameTemplate>Country.java</fileNameTemplate>
+                            <!--
+                            <contextMode>ONE_CONTEXT_PER_FILE</contextMode>
+                            <pathToCsv>${basedir}/src/main/resources/countries.csv</pathToCsv>
+                            -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
