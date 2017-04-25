@@ -1,0 +1,14 @@
+#set( $firstRow = ${source.rows[0]} )
+#set( $className = ${firstRow.data.Continent.replace(' ','')} )
+package com.danidemi.test;
+
+public class ${className} {
+
+    public String[] countries = {
+    #foreach($row in ${source.rows})
+        "${row.data.Country}"#if( ${row.meta.count} != ${source.rows.size()} ),#else
+    #end
+    #end
+    } ;
+
+}

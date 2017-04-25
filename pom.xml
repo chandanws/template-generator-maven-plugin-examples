@@ -9,6 +9,7 @@
     <modules>
         <module>one-source-file-to-one-generated-file</module>
         <module>one-source-row-to-one-generated-file</module>
+        <module>one-source-row-group-to-one-generated-file</module>
     </modules>
     <packaging>pom</packaging>
 

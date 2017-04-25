@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>template-generator-maven-plugin-examples</artifactId>
+        <groupId>com.danidemi</groupId>
+        <version>0.0.5-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>one-source-row-group-to-one-generated-file</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.danidemi</groupId>
+                <artifactId>template-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>countries</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <contextMode>ONE_CONTEXT_PER_TAG</contextMode>
+                            <pathToTemplate>${project.basedir}/src/main/resources/Continent.java.vm</pathToTemplate>
+                            <pathToCsv>${project.basedir}/src/main/resources/countries.csv</pathToCsv>
+                            <pathToOutputFolder>${build.directory}/generated-sources/tgmp</pathToOutputFolder>
+                            <tagExpressions>
+                                <tagExpression>@{row.data.Continent}</tagExpression>
+                            </tagExpressions>
+                            <fileNameTemplate>com/danidemi/test/${source.rows[0].data.Continent.replace(' ','')}.java</fileNameTemplate>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${build.directory}/generated-sources/tgmp</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
