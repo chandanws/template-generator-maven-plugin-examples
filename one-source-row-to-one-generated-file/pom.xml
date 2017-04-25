@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>one-source-file-to-one-generated-file</artifactId>
+    <artifactId>one-source-row-to-one-generated-file</artifactId>
 
     <build>
         <plugins>
@@ -24,11 +24,11 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <contextMode>ONE_CONTEXT_PER_CSV</contextMode>
+                            <contextMode>ONE_CONTEXT_PER_LINE</contextMode>
                             <pathToTemplate>${project.basedir}/src/main/resources/Country.java.vm</pathToTemplate>
                             <pathToCsv>${project.basedir}/src/main/resources/countries.csv</pathToCsv>
                             <pathToOutputFolder>${build.directory}/generated-sources/tgmp</pathToOutputFolder>
-                            <fileNameTemplate>com/danidemi/test/Country.java</fileNameTemplate>
+                            <fileNameTemplate>com/danidemi/test/${source.rows[0].data.Country.replace(' ','')}.java</fileNameTemplate>
                         </configuration>
                     </execution>
                 </executions>
@@ -60,6 +60,5 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

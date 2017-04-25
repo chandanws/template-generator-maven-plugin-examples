@@ -1,0 +1,28 @@
+#set( $row = ${source.rows[0]} )
+#set( $className = ${row.data.Country.replace(' ','')} )
+package com.danidemi.test;
+
+public class ${className} {
+
+    private final String name;
+    private final String continent;
+    private final String code;
+
+    ${className}(){
+        this.name = "${row.data.Country}";
+        this.continent = "${row.data.Continent}";
+        this.code = "${row.data.Code}";
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getContinent(){
+        return continent;
+    }
+
+    public String getCode(){
+        return code;
+    }
+}
